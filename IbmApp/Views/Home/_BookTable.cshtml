@@ -1,0 +1,59 @@
+﻿@model List<IbmApp.Web.Models.Dtos.BookDto>
+
+<table style="margin-top: 20px;" class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Author</th>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Price</th>
+            <th>Publish Date</th>
+            <th>Description</th>
+            <th>Rented By</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <div class="modal fade" id="rentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Rent book</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="modalBody" class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Author</td>
+                <td>@item.Title</td>
+                <td>@item.Genre</td>
+                <td>@item.Price</td>
+                <td>@item.PublishDate.ToShortDateString()</td>
+                <td>@item.Description</td>
+                <td>@item.RentedBy</td>
+                <td>
+                    @if (item.RentedBy == null)
+                    {
+                        <button data-toggle="modal" data-target="#rentModal" data-bookid="@item.Id" class="btn btn-primary getFormButton m-1">Rent</button>
+                    }
+                    else
+                    {
+                        <button id="returnBookButton" data-bookidtoreturn="@item.Id" class="btn btn-danger m-1">Return</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

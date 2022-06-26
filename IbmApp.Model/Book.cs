@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -8,6 +7,9 @@ namespace IbmApp.Model
 {
     public class Book
     {
+        [XmlAttribute("id")]
+        public string Id { get; set; }
+
         [XmlElement("author")]
         public string Author { get; set; }
 
@@ -25,6 +27,7 @@ namespace IbmApp.Model
 
         [XmlElement("description")]
         public string Description { get; set; }
+        public string RentedBy { get; set; }
 
         public static List<Book> SeedBooksFromXml()
         {

@@ -1,5 +1,3 @@
-using System;
-
 namespace IbmApp.Models
 {
     public class ErrorViewModel

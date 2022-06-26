@@ -1,12 +1,11 @@
 ﻿using IbmApp.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace IbmApp.Web.Models.Dtos
 {
     public class BookDto
     {
+        public string Id { get; set; }
         public string Author { get; set; }
         public string Title { get; set; }
         public string Genre { get; set; }
@@ -19,12 +18,29 @@ namespace IbmApp.Web.Models.Dtos
         {
             return new BookDto()
             {
+                Id = book.Id,
                 Author = book.Author,
                 Title = book.Title,
                 Genre = book.Genre,
                 Price = book.Price,
                 PublishDate = book.PublishDate,
                 Description = book.Description,
+                RentedBy = book.RentedBy
+            };
+        }
+
+        public static Book ToBook(BookDto book)
+        {
+            return new Book()
+            {
+                Id = book.Id,
+                Author = book.Author,
+                Title = book.Title,
+                Genre = book.Genre,
+                Price = book.Price,
+                PublishDate = book.PublishDate,
+                Description = book.Description,
+                RentedBy = book.RentedBy
             };
         }
     }

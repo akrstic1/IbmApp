@@ -1,8 +1,48 @@
-﻿@{
+﻿@model List<IbmApp.Web.Models.Dtos.BookDto>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1>Book list</h1>
+
+
+<div id="table-container">
+    <partial name="_BookTable" />
 </div>
+
+@section Scripts{
+    <script>
+        var urlGetForm = '@Url.Action("GetForm", "Home")';
+
+        //$(document).on("click", "#rentFormSubmitButton", function() {
+        //    console.log($("#rentForm").valid())
+        //    $('#rentModal').modal('hide');
+        //    $('#rentModal').on('hidden.bs.modal', function() {
+        //        $.ajax({
+        //            url: "@Url.Action("RentBook", "Home")",
+        //            method: "POST",
+        //            data: $("#rentForm").serialize(),
+        //            success: function(html) {
+        //                $("#table-container").html(html);
+        //            }
+        //        })
+        //    })
+        //});
+
+        $("#table-container").on("click", ".getFormButton", function() {
+            $('#modalBody').load(urlGetForm, { bookId: $(this).data("bookid") });
+        })
+
+         $("#table-container").on("click", "#returnBookButton", function() {
+            $.ajax({
+                    url: "@Url.Action("ReturnBook", "Home")",
+                    method: "POST",
+                    data: { bookIdToReturn: $(this).data("bookidtoreturn") },
+                    success: function(html) {
+                        $("#table-container").html(html);
+                    }
+                })
+        })
+
+    </script>
+} 

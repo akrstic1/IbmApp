@@ -1,0 +1,12 @@
+﻿@model IbmApp.Web.Models.RentBook
+
+<form id="rentForm" asp-action="RentBook" method="POST">
+    <div class="form-group">
+        <input type="hidden" asp-for="Id" />
+        <label class="control-label">Rent @Model.Title by @Model.Author to</label>
+        <input asp-for="RentTo" class="form-control" />
+        <span asp-validation-for="RentTo" class="text-danger"></span>
+    </div>
+    <button type="submit" id="rentFormSubmitButton" class="btn btn-primary">Rent</button>
+</form>
+<partial name="_ValidationScriptsPartial" />
